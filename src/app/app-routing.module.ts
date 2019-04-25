@@ -4,7 +4,7 @@ import { AboutComponent } from './about/about.component';
 import { ModelsComponent } from './models/models.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'model' },
+  { path: '', pathMatch: 'full', redirectTo: 'about' },
   { path: 'about', component: AboutComponent },
   { path: 'models', component: ModelsComponent },
 ];
