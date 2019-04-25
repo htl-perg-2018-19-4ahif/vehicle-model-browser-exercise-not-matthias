@@ -63,7 +63,7 @@ export class VehicleApiService {
    * @param offset the specified offset
    */
   public getFilteredModelsByOffset(makes: string, year: number, offset: number): Observable<IModel[]> {
-    return this.http.get<IModel[]>(`${this.baseUrl} /api/models ? makes = ${makes}& year=${year}& offset;=${offset} `);
+    return this.http.get<IModel[]>(`${this.baseUrl} /api/models?makes = ${makes}&year=${year}&offset;=${offset} `);
   }
 
   /**
