@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VehicleApiService } from '../vehicle-api.service';
 
 @Component({
   selector: 'app-models',
@@ -7,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModelsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api: VehicleApiService) { }
 
   ngOnInit() {
   }
-
 }
