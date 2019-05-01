@@ -1,7 +1,19 @@
 <div align="center">
-  <!-- Filter  -->
-  <mat-form-field class="small-custom-width">
-    <input matInput placeholder="Filter" [(ngModel)]="filter">
+
+  <mat-form-field style="padding-right: 10px">
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="selectedYear" (valueChange)="fetchModels()">
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="selectedMake" (valueChange)="fetchModels()">
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let make of makes" [value]="make">{{ make }}</mat-option>
+    </mat-select>
   </mat-form-field>
 
   <!-- Table -->

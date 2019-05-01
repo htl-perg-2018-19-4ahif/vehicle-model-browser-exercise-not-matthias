@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleApiService, IModel } from '../vehicle-api.service';
 import { PageEvent } from '@angular/material/paginator';
-import { DataSource } from '@angular/cdk/table';
 
 @Component({
   selector: 'app-models',
@@ -12,7 +11,10 @@ export class ModelsComponent implements OnInit {
   public displayedColumns: string[] = ['year', 'make', 'model'];
   public dataSource: IModel[] = [];
 
-  public filter = '';
+  private years: number[] = [];
+  private makes: string[] = [];
+  private selectedYear = 0;
+  private selectedMake = '';
 
   public pageSize = 10;
   public pageIndex = 0;
@@ -22,6 +24,8 @@ export class ModelsComponent implements OnInit {
 
   ngOnInit() {
     this.fetchModels();
+    this.fetchYears();
+    this.fetchMakes();
   }
 
   onPageChanged(pageEvent: PageEvent) {
@@ -46,7 +50,16 @@ export class ModelsComponent implements OnInit {
     this.fetchModels();
   }
 
-  fetchModels() {
-    this.api.getModelsByOffset(this.pageIndex * this.pageSize, this.pageSize).subscribe(data => this.dataSource = data);
+  private fetchModels() {
+    this.api.getFilteredModelsByOffset(this.selectedMake, this.selectedYear, this.pageIndex * this.pageSize, this.pageSize)
+      .subscribe(data => this.dataSource = data);
+  }
+
+  private fetchYears() {
+    this.api.getYears().subscribe(data => this.years = data);
+  }
+
+  private fetchMakes() {
+    this.api.getMakes().subscribe(data => this.makes = data);
   }
 }

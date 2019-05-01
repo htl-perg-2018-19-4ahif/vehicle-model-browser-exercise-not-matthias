@@ -40,13 +40,6 @@ export class VehicleApiService {
   }
 
   /**
-   * Returns all vehicle models.
-   */
-  public getAllModels(): Observable<IModel[]> {
-    return this.getModelsByOffset(0, 1000);
-  }
-
-  /**
    * Returns the model with the specified id.
    * @param id the model id
    */
@@ -65,19 +58,26 @@ export class VehicleApiService {
 
   /**
    * Returns the models filtered by makes and year.
-   * @param makes the makes filter
+   * @param make the make filter
    * @param year the year filter
    * @param offset the specified offset
    */
-  public getFilteredModelsByOffset(makes: string, year: number, offset: number): Observable<IModel[]> {
-    return this.http.get<IModel[]>(`${this.baseUrl} /api/models?makes = ${makes}&year=${year}&offset;=${offset} `);
+  public getFilteredModelsByOffset(make: string, year: number, offset: number, count: number): Observable<IModel[]> {
+    return this.http.get<IModel[]>(`${this.baseUrl}/api/models`, {
+      params: {
+        make: (make || '').toString(),
+        year: (year || '').toString(),
+        offset: offset.toString(),
+        fetch: count.toString(),
+      }
+    });
   }
 
   /**
    * Returns the vehicle producers.
    */
   public getMakes(): Observable<string[]> {
-    return this.http.get<string[]>(`;$;{ this.baseUrl; } /api/makes`);
+    return this.http.get<string[]>(`${this.baseUrl}/api/makes`);
   }
 
   /**
@@ -85,14 +85,13 @@ export class VehicleApiService {
    * @param filter the specified filter
    */
   public getFilteredMakes(filter: string): Observable<string[]> {
-    return this.http.get<string[]>(`;$;{ this.baseUrl; } /api/makes ? make = $;{ filter; } `);
+    return this.http.get<string[]>(`${this.baseUrl}/api/makes?make=${filter}`);
   }
 
   /**
    * Returns a list of fuel types.
    */
   public getFuelTypes(): Observable<IFuel[]> {
-    return this.http.get<IFuel[]>(`;$;{ this.baseUrl; } /api/fuelTypes`);
+    return this.http.get<IFuel[]>(`${this.baseUrl}/api/fuelTypes`);
   }
 }
-
