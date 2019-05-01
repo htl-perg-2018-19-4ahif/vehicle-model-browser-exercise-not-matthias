@@ -40,6 +40,13 @@ export class VehicleApiService {
   }
 
   /**
+   * Returns all vehicle models.
+   */
+  public getAllModels(): Observable<IModel[]> {
+    return this.getModelsByOffset(0, 1000);
+  }
+
+  /**
    * Returns the model with the specified id.
    * @param id the model id
    */
@@ -53,7 +60,7 @@ export class VehicleApiService {
    * @param count the end point (offset + count)
    */
   public getModelsByOffset(offset: number, count: number): Observable<IModel[]> {
-    return this.http.get<IModel[]>(`${this.baseUrl} /api/models ? offset = ${offset}& fetch=${count} `);
+    return this.http.get<IModel[]>(`${this.baseUrl}/api/models?offset=${offset}&fetch=${count}`);
   }
 
   /**

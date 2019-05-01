@@ -27,6 +27,11 @@
 
   <!-- Pagination -->
   <div class="custom-width">
-    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <!-- <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" [pageSize]="pageSize"
+      [length]="dataSource.length" (page)="onPageChanged($event)">
+    </mat-paginator> -->
+
+    <button mat-button [disabled]="!hasPrevious" (click)="onPreviousClick()">Previous</button>
+    <button mat-button [disabled]="!hasNext" (click)="onNextClick()">Next</button>
   </div>
 </div>
